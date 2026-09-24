@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Italiano A1 – Unit 1</title>
+<style>
+body{font:16px/1.5 system-ui,sans-serif;max-width:720px;margin:0 auto;padding:12px;color:#222;background:#faf7f0}
+h1{font-size:1.5rem;margin:.3rem 0}h2{font-size:1.25rem}
+.card{background:#fff;border:2px solid #333;border-radius:12px;padding:14px;margin:12px 0}
+.cue{background:#fff3cf;border:2px dashed #b8860b;border-radius:8px;padding:8px;text-align:center;font-weight:700;margin:10px 0}
+.warn{background:#fde8e4;border-left:4px solid #c0392b;padding:6px 10px;border-radius:4px}
+.chip{display:inline-block;background:#2c6e6b;color:#fff;border-radius:99px;padding:1px 10px;font-size:.78rem}
+.chip.r{background:#c1592b}.chip.c{background:#7a6fb0}
+button{font:inherit;cursor:pointer;border:2px solid #333;border-radius:8px;padding:8px 12px;background:#fff;margin:3px}
+button.p{background:#2c6e6b;color:#fff}button:disabled{opacity:.5}
+.opts button{display:block;width:100%;text-align:left}
+.ok{background:#d8f0dc!important}.no{background:#f6d5d0!important}
+.fb{margin-top:10px;padding:10px;border-radius:8px}.fb.ok{border:2px solid #3f7d45}.fb.no{border:2px solid #b84438}
+input{font:inherit;padding:8px;border:2px solid #333;border-radius:8px;width:100%;max-width:320px}
+.bar{height:10px;background:#ddd;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:#2c6e6b}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:4px 8px;text-align:left}
+.mod{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ans{min-height:44px;border:2px solid #333;border-radius:8px;padding:6px;margin:8px 0}
+</style></head><body>
+<h1>🇮🇹 Italiano A1 · Unit 1</h1>
+<div class="bar"><i id="pb"></i></div><small id="pt"></small>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const n2=s=>String(s).toLowerCase().replace(/[’`]/g,"'").replace(/[.?!,]/g,'').replace(/\s*-\s*/g,'-').replace(/\s+/g,' ').trim();
+const mc=(q,a,w,why,r)=>({k:'mc',q,a,o:[a,...w],why,r});
+const fi=(q,a,why,r)=>({k:'fi',q,a,why,r});
+const od=(q,a,why,r)=>({k:'od',q,a,t:a.split(' '),why,r});
+
+const M=[
+{n:"1. Saluti · Greetings",g:0,
+why:"Greeting correctly is your first social skill. The right word depends on time of day, arrival vs departure, and formality.",
+rule:"<b>buongiorno</b> = morning/day (formal) · <b>buonasera</b> = evening (formal) · <b>buonanotte</b> = going to sleep · <b>arrivederci</b> = goodbye (formal) · <b>ciao</b> = hi AND bye (informal) · <b>salve</b> = neutral hello, between formal and informal.",
+cue:"day→buongiorno · evening→buonasera · sleep→buonanotte · leaving→arrivederci · informal→ciao",
+ex:["Buongiorno, signora! (morning, formal)","Ciao, Marco! (friend, hello or bye)","Buonanotte, mamma. (going to bed)","Arrivederci, professore. (leaving, formal)"],
+mis:"Saying <i>buonanotte</i> when you arrive in the evening. Use <i>buonasera</i>; buonanotte is only for going to sleep.",
+rl:"Greeting depends on time of day, arrival/departure and formality.",
+rec:"Review greetings: buonasera vs buonanotte, and arrival vs departure.",
+q:[mc("It's 9 a.m. You greet your teacher (formal).","Buongiorno",["Buonasera","Buonanotte","Arrivederci"],"Morning/daytime → buongiorno."),
+mc("You are going to bed. You say:","Buonanotte",["Buonasera","Ciao","Arrivederci"],"Buonanotte is only for going to sleep."),
+mc("You leave a shop (formal). You say:","Arrivederci",["Buongiorno","Buonanotte","Salve"],"Arrivederci = formal goodbye (departure)."),
+mc("Which greeting works for arriving AND leaving with a friend?","Ciao",["Buongiorno","Arrivederci","Buonasera"],"Ciao is informal and works both ways."),
+mc("You arrive at a restaurant at 8 p.m. (formal).","Buonasera",["Buonanotte","Buongiorno","Ciao"],"Evening arrival → buonasera. Buonanotte is a common wrong choice."),
+fi("Type the greeting (morning, formal): ___, signora!","buongiorno","Morning greeting.")]},
+
+{n:"2. Come ti chiami? · Names",g:1,
+why:"Introducing yourself is the first conversation you'll have. CHIAMARSI is the verb for names.",
+rule:"<b>io mi chiamo · tu ti chiami · lui/lei/Lei si chiama</b><br>MI/TI/SI change because chiamarsi is <i>reflexive</i> (literally 'I call myself'): the little pronoun always matches the subject, and the verb ending changes too (-o, -i, -a).<br>Questions: <i>Come ti chiami?</i> · <i>E tu?</i> · formal <i>E Lei?</i> · Meeting: <i>Piacere!</i> → <i>Piacere mio.</i>",
+cue:"MI – TI – SI",
+ex:["Come ti chiami? – Mi chiamo Sara. E tu?","Come si chiama? – Mi chiamo Paolo. E Lei?","Piacere! – Piacere mio."],
+mis:"Dropping the pronoun: <s>Io chiamo Sara</s>. You need <b>mi</b>.",
+rl:"chiamarsi: io mi chiamo · tu ti chiami · lui/lei/Lei si chiama.",
+rec:"Review CHIAMARSI: MI – TI – SI.",
+q:[fi("Io ___ chiamo Anna.","mi","Subject io → MI."),
+fi("Tu come ___ chiami?","ti","Subject tu → TI."),
+fi("Lei come ___ chiama?","si","lui/lei/Lei → SI."),
+mc("Someone says «Piacere!». You answer:","Piacere mio.",["Arrivederci.","Mi chiamo.","Buonanotte."],"Piacere mio = the pleasure is mine."),
+mc("— Come ti chiami? — ___","Mi chiamo Marta.",["Ti chiami Marta.","Si chiama Marta.","Io chiamo Marta."],"Answer about yourself with mi chiamo."),
+mc("To a friend: «Mi chiamo Luca. ___?»","E tu",["E Lei","E io","E si"],"Friend = informal → E tu? (E Lei? is formal).")]},
+
+{n:"3. Essere · To be",g:1,
+why:"ESSERE lets you say who you are, your nationality and where you're from.",
+rule:"<b>io sono · tu sei · lui/lei/Lei è</b><br>Uses: identity (<i>Sono Anna</i>), nationality (<i>Sono italiano</i>), origin with <b>di + place</b> (<i>Sono di Roma</i>). Question: <i>Di dove sei?</i>",
+cue:"SONO – SEI – È",
+ex:["Sono italiano.","Sono di Roma.","Lei è francese.","Di dove sei?"],
+mis:"Writing <i>e</i> instead of <i>è</i>. <i>e</i> means 'and'; <i>è</i> = 'is'.",
+rl:"essere: io sono · tu sei · lui/lei/Lei è; origin = essere + di + place.",
+rec:"Review ESSERE: SONO – SEI – È, and 'di' for origin.",
+q:[fi("Io ___ italiano.","sono","io → sono."),
+fi("Tu ___ di Roma?","sei","tu → sei."),
+fi("Lei ___ francese.","è","lei → è (with the accent)."),
+mc("«Di dove sei?» — ___","Sono di Roma.",["Ho di Roma.","Sei di Roma.","Sono a Roma."],"Origin = essere + di + city."),
+fi("Lui ___ di Madrid.","è","lui → è."),
+mc("Which word shows origin?","di",["a","con","per"],"essere + di + place.")]},
+
+{n:"4. Paesi e nazionalità",g:0,
+why:"Say where people are from and what nationality they are; masculine/feminine matters.",
+rule:"Italia→italiano/-a→Roma · Francia→francese→Parigi · Spagna→spagnolo/-a→Madrid · Germania→tedesco/-a→Berlino · Inghilterra→inglese→Londra · Cina→cinese→Pechino · Russia→russo/-a→Mosca · Brasile→brasiliano/-a→Brasilia · Marocco→marocchino/-a→Rabat · also peruviano/-a, canadese.<br><b>-o → -a</b> for feminine. <b>-e</b> forms stay unchanged (m. and f.).",
+cue:"-O → -A  ·  -E stays -E",
+ex:["Lui è italiano, lei è italiana.","Lei è francese. Lui è francese.","Sono tedesco/tedesca."],
+mis:"Making -e forms feminine: <s>francesa</s>. The correct form is <i>francese</i>.",
+rl:"-o → -a for feminine; -e nationalities don't change.",
+rec:"Review nationality agreement (-o/-a vs -e) and capitals.",
+q:[mc("Spagna → nationality (feminine):","spagnola",["spagnolo","spagnole","spagnolese"],"-o → -a."),
+mc("Francia → nationality (feminine):","francese",["francesa","francesse","francise"],"-e forms don't change."),
+fi("Capital of Germania:","Berlino","Germania → Berlino."),
+fi("Capital of Cina:","Pechino","Cina → Pechino."),
+fi("Nationality (feminine) of Russia:","russa","russo → russa."),
+mc("Lei è di Londra. Lei è ___.","inglese",["inglesa","inglesi","londrese"],"-e nationality, same for m./f."),
+mc("Capital of Marocco:","Rabat",["Madrid","Brasilia","Mosca"],"Marocco → Rabat."),
+fi("Feminine of tedesco:","tedesca","-co → -ca (keeps the hard C).")]},
+
+{n:"5. Parole della classe",g:0,
+why:"Objects you can name and ask for. Always learn the noun together with its article.",
+rule:"una penna · una matita · un quaderno · uno zaino · un dizionario · un'agenda · un evidenziatore · una chiave · un foglio · una lavagna · una porta · una finestra · una sedia · un tavolo · un libro · un astuccio · una calcolatrice · una gomma · uno studente · una studentessa · una lezione · una signora",
+cue:"noun + article, always together",
+ex:["una penna","uno zaino","un'agenda","una studentessa"],
+mis:"Learning the word without its article: you then can't tell un/uno/una.",
+rl:"Learn each noun with its article (un/uno/una/un').",
+rec:"Review classroom vocabulary with articles.",
+q:[mc("a pen","una penna",["un penna","uno penna","un'penna"],"penna is feminine → una."),
+mc("a backpack","uno zaino",["un zaino","una zaino","un'zaino"],"zaino: masculine + Z → uno."),
+mc("a calculator","una calcolatrice",["un calcolatrice","uno calcolatrice","un'calcolatrice"],"Feminine + consonant → una."),
+fi("Type: a dictionary","un dizionario","Masculine, normal consonant → un."),
+fi("Type: a student (female)","una studentessa","Feminine of studente → una studentessa."),
+mc("«una chiave» means:","a key",["a window","a table","a pen"],"chiave = key."),
+mc("«un astuccio» is:","a pencil case",["a board","a door","a chair"],"astuccio = pencil case.")]},
+
+{n:"6. Avere · To have + non",g:1,
+why:"AVERE lets you talk about what you have; NON makes any sentence negative.",
+rule:"<b>io ho · tu hai · lui/lei/Lei ha</b>. Use: possession (<i>Ho una penna. Hai un quaderno? Lei ha un dizionario.</i>).<br>The <b>H</b> is silent but required in writing: <i>ho</i> ≠ <i>o</i> (or), <i>ha</i> ≠ <i>a</i> (to/at).<br>Negation: <b>NON + verb</b>: <i>Non sono italiano. Non ho una penna. Non è spagnolo.</i>",
+cue:"HO – HAI – HA · NON + VERBO",
+ex:["Ho una penna.","Hai un quaderno?","Non ho una penna.","Non è spagnolo."],
+mis:"Writing <i>O una penna</i> (o = 'or') and putting <i>non</i> after the verb.",
+rl:"avere: ho · hai · ha (H required). Negation: non goes directly before the verb.",
+rec:"Review AVERE (HO – HAI – HA) and NON + verb.",
+q:[fi("Io ___ una penna.","ho","io → ho."),
+fi("Tu ___ un quaderno?","hai","tu → hai."),
+fi("Lei ___ un dizionario.","ha","lei → ha."),
+mc("Write «I have a pen»:","Ho una penna.",["O una penna.","Hai una penna.","Sono una penna."],"The silent H is required: o means 'or'."),
+od("Build: I don't have a pen","Non ho una penna","non goes right before the verb."),
+od("Build: He is not Spanish","Non è spagnolo","non + è."),
+mc("Negate: «Sono italiano.»","Non sono italiano.",["Sono non italiano.","No sono italiano.","Non italiano sono."],"non goes directly before the verb.")]},
+
+{n:"7. Articoli indeterminativi",g:1,
+why:"Every noun needs an article. Decision tree: 1) gender → 2) first letter(s) → 3) article.",
+rule:"<b>un</b> = masculine, normal noun (un libro)<br><b>uno</b> = masculine starting with z or s+consonant (uno zaino, uno studente)<br><b>una</b> = feminine + consonant (una penna, una lezione)<br><b>un'</b> = feminine + vowel (un'agenda)<br>Masculine + vowel = plain <b>un</b> (un evidenziatore): no apostrophe.",
+cue:"UN / UNO / UNA / UN'",
+ex:["un libro","uno zaino","uno studente","una penna","una lezione","un'agenda"],
+mis:"<s>un zaino</s> → <i>uno zaino</i>; <s>una agenda</s> → <i>un'agenda</i>.",
+rl:"un (m.) · uno (m. z/s+consonant) · una (f.+consonant) · un' (f.+vowel).",
+rec:"Review articles, especially UNO and UN'.",
+q:[fi("___ zaino","uno","masculine, starts with Z → uno. Remember: Z → UNO."),
+fi("___ libro","un","masculine, normal consonant → un."),
+fi("___ studente","uno","masculine, S+T (s + consonant) → uno."),
+fi("___ agenda","un'","feminine + vowel → un' with apostrophe."),
+fi("___ lezione","una","feminine + consonant → una."),
+fi("___ evidenziatore","un","masculine before a vowel → un (apostrophe only for feminine)."),
+fi("___ sedia","una","feminine + consonant → una.")]},
+
+{n:"8. Maschile / femminile",g:1,
+why:"Gender decides the article and the adjective ending.",
+rule:"Nouns in <b>-o</b> are usually masculine, in <b>-a</b> usually feminine. Nouns in <b>-e</b> can be either (<i>lezione</i> f., <i>studente</i> m.): learn them with the article. People: studente → studentessa.",
+cue:"-o = m · -a = f · -e = check the article",
+ex:["un quaderno (m.)","una penna (f.)","un tavolo (m.)","una chiave (f.)"],
+mis:"Assuming every -e noun is masculine (<i>una lezione</i>, <i>una chiave</i> are feminine).",
+rl:"-o mostly masculine, -a mostly feminine, -e: learn with the article.",
+rec:"Review masculine/feminine classification.",
+q:[mc("penna is…","feminine",["masculine"],"-a ending → feminine."),
+mc("quaderno is…","masculine",["feminine"],"-o ending → masculine."),
+mc("lezione is…","feminine",["masculine"],"-e noun: una lezione."),
+mc("chiave is…","feminine",["masculine"],"-e noun: una chiave."),
+mc("Which pair is correct?","uno studente / una studentessa",["un studente / una studentessa","uno studente / uno studentessa","una studente / uno studentessa"],"Masc. s+consonant → uno; fem. → una studentessa.")]},
+
+{n:"9. Formale / informale + domande",g:1,
+why:"Use tu with friends and Lei with people you address politely. Lei takes the 3rd-person singular verb.",
+rule:"<b>TI → SI · SEI → È · HAI → HA · PUOI → PUÒ</b><br>Come ti chiami? → Come si chiama? · Di dove sei? → Di dov'è? · Sei italiano? → È italiano? · Hai una penna? → Ha una penna? · Puoi ripetere? → Può ripetere? · E tu? → E Lei?<br><b>Come si scrive?</b> = how do you spell it? · <b>Come si dice?</b> = how do you say it in Italian? · <b>Che significa?</b> = what does it mean?",
+cue:"TI→SI · SEI→È · HAI→HA · PUOI→PUÒ",
+ex:["Come ti chiami? / Come si chiama?","Hai una penna? / Ha una penna?","Puoi ripetere? / Può ripetere?"],
+mis:"Mixing forms: <s>Lei sei di Roma</s> → <i>Lei è di Roma</i>.",
+rl:"Formal Lei uses the 3rd person singular: TI→SI, SEI→È, HAI→HA, PUOI→PUÒ.",
+rec:"Review formal Lei forms and the difference between Come si scrive / Come si dice / Che significa.",
+q:[fi("Informal: Come ti chiami? → Formal: Come ___ chiama?","si","ti → si."),
+mc("Formal of «Hai una penna?»","Ha una penna?",["Hai una penna, Lei?","Ha hai una penna?","Sei una penna?"],"hai → ha."),
+mc("Formal of «Di dove sei?»","Di dov'è?",["Di dove sei, Lei?","Di dov'hai?","Di dove si?"],"sei → è."),
+mc("Formal of «Puoi ripetere?»","Può ripetere?",["Puo ripetere?","Puoi ripetere, Lei?","Ha ripetere?"],"puoi → può (accent)."),
+fi("Informal of «È italiano?» → ___ italiano?","sei","è → sei with tu."),
+mc("«Come si scrive?» asks…","how to spell it",["what it means","how to say it in Italian","the person's name"],"Come si scrive = spelling."),
+mc("«Che significa?» asks…","what a word means",["how to spell it","how to say it in Italian","where you're from"],"Che significa = meaning."),
+mc("«Come si dice 'pen' in italiano?» asks…","how to say it in Italian",["how to spell it","what it means","who you are"],"Come si dice = the Italian word.")]},
+
+{n:"10. Numeri 0–20",g:0,
+why:"Numbers appear everywhere: phone numbers, prices, ages. Practise in any order, not only 1-2-3.",
+rule:"0 zero · 1 uno · 2 due · 3 tre · 4 quattro · 5 cinque · 6 sei · 7 sette · 8 otto · 9 nove · 10 dieci · 11 undici · 12 dodici · 13 tredici · 14 quattordici · 15 quindici · 16 sedici · 17 diciassette · 18 diciotto · 19 diciannove · 20 venti",
+cue:"11–16 end in -dici · 17–19 = dici + number",
+ex:["9 + 8 = diciassette","20 − 4 = sedici"],
+mis:"Confusing <i>sei</i> (6) with <i>sei</i> ('you are'): the context tells you.",
+rl:"11–16 end in -dici; 17–19 = dici + a number.",
+rec:"Review numbers: 11–20 and arithmetic answers.",
+q:[fi("7 in Italian:","sette","7 = sette."),
+fi("15 in Italian:","quindici","15 = quindici."),
+mc("diciassette =","17",["16","18","19"],"dici + sette = 17."),
+fi("9 + 8 = ?","diciassette","9 + 8 = 17."),
+fi("20 − 4 = ?","sedici","20 − 4 = 16."),
+fi("Backwards: venti, diciannove, ___","diciotto","19 − 1 = 18."),
+mc("Which is 12?","dodici",["tredici","undici","dieci"],"dodici = 12."),
+fi("sei + sei = ?","dodici","6 + 6 = 12.")]},
+
+{n:"11. Alfabeto e spelling",g:0,
+why:"To spell your name you need Italian letter names.",
+rule:"a · bi · ci · di · e · effe · gi · <b>acca</b> · i · elle · emme · enne · o · pi · <b>qu</b> · erre · esse · ti · u · vu · zeta.<br>Foreign letters: j = i lunga · k = kappa · w = doppia vu · x = ics · y = ipsilon.",
+cue:"H = acca · Q = qu · Z = zeta · W = doppia vu",
+ex:["CASA = ci-a-esse-a","HO = acca-o"],
+mis:"Skipping H when spelling <i>ho / hai / ha</i>.",
+rl:"Learn Italian letter names: H = acca, Q = qu, W = doppia vu…",
+rec:"Review letter names and spelling.",
+q:[mc("Name of H:","acca",["effe","ti","erre"],"H = acca."),
+mc("Name of Q:","qu",["ku","cu","kappa"],"Q = qu."),
+mc("Name of W:","doppia vu",["vu","zeta","ipsilon"],"W = doppia vu."),
+mc("Name of Y:","ipsilon",["i lunga","ics","zeta"],"Y = ipsilon."),
+fi("Spell CASA (dash-separated):","ci-a-esse-a","C=ci, A=a, S=esse, A=a."),
+fi("Spell HO (dash-separated):","acca-o","H = acca (required!)."),
+mc("Which spelling of ZAINO is WRONG?","zeta-a-enne-i-o",["zeta-a-i-enne-o","zeta-a-i-enne-o (ZAINO)"],"ZAINO = zeta-a-i-enne-o; the wrong one swaps i and enne.")]},
+
+{n:"12. Integrazione",g:1,
+why:"Combine everything: greetings, names, origin, objects, essere, avere, articles, formal/informal.",
+rule:"Mix: <b>mi chiamo · sono di · sono + nationality · ho + article + object · non + verb · tu → Lei</b>.",
+cue:"MI/TI/SI · SONO/SEI/È · HO/HAI/HA · UN/UNO/UNA/UN'",
+ex:["Buongiorno, mi chiamo Sara. Sono di Roma, sono italiana. Ho un'agenda."],
+mis:"Using tu forms with a formal Lei.",
+rl:"Combine chiamarsi, essere, avere, articles and formal/informal forms.",
+rec:"Practise combined communication: names + origin + objects + formal forms.",
+q:[od("Build: My name is Sara and I am from Rome","Mi chiamo Sara e sono di Roma","mi chiamo + e + sono di + city."),
+od("Build (formal): What is your name?","Come si chiama","Formal Lei → si chiama."),
+fi("Lei ___ una matita. (avere)","ha","Lei → ha."),
+fi("Lei non ___ spagnola. (essere)","è","non + è."),
+mc("Ho ___ agenda.","un'",["una","uno","un"],"agenda: feminine + vowel → un'."),
+fi("Non ho ___ zaino.","uno","zaino: masculine + Z → uno."),
+mc("Lei è di Madrid. Lei è ___.","spagnola",["spagnolo","spagnolese","madrida"],"Feminine of spagnolo."),
+mc("Which sentence is correct?","Sono di Pechino, sono cinese.",["Ho di Pechino, ho cinese.","Sono di Pechino, sono cinesa.","Sei di Pechino, sono cinese."],"essere + di + city; -e nationality unchanged."),
+mc("— Buonasera, come si chiama? — ___","Mi chiamo Paolo. E Lei?",["Ti chiami Paolo. E tu?","Mi chiamo Paolo. E tu?","Si chiama Paolo. E Lei?"],"Formal exchange: mi chiamo… E Lei?")]}
+];
+M.forEach((m,i)=>m.q.forEach(q=>{q.m=i;q.r=q.r||m.rl;q.e=m.ex[Math.floor(Math.random()*m.ex.length)];}));
+
+let P={d:{}},S=null;
+try{P=JSON.parse(localStorage.getItem('it_u1')||'{"d":{}}')}catch(e){}
+const save=()=>{try{localStorage.setItem('it_u1',JSON.stringify(P))}catch(e){}};
+const show=h=>$('#app').innerHTML=h;
+function bar(){const d=Object.keys(P.d).length;$('#pb').style.width=(d/12*100)+'%';$('#pt').textContent=d+' / 12 modules completed'}
+
+function home(){
+ bar();const done=i=>P.d[i]!==undefined;
+ let h='<div class="card"><b>How it works:</b> each module = small explanation → practice with feedback → review of earlier modules → “Can you remember?”. Modules unlock in order. Finish all 12 to unlock the final exam.</div>';
+ M.forEach((m,i)=>{const lock=i>0&&!done(i-1);
+  h+=`<div class="card mod"><div><b>${m.n}</b><br><small>${done(i)?'Best score: '+P.d[i]+'%':lock?'🔒 finish the previous module':'Ready'}</small></div><button class="p" ${lock?'disabled':''} onclick="runMod(${i})">${done(i)?'Repeat':'Start'}</button></div>`});
+ const all=M.every((_,i)=>done(i));
+ h+=`<div class="card mod"><div><b>🏁 Final Unit 1 Exam</b><br><small>${all?'Ready':'🔒 finish all modules'}</small></div><button class="p" ${all?'':'disabled'} onclick="runExam()">Start</button></div>
+ <button onclick="if(confirm('Reset all progress?')){P={d:{}};save();home()}">Reset progress</button>`;
+ show(h);
+}
+function newS(steps,mode,title,mi){S={steps,i:0,mode,title,mi,sc:{},miss:new Set(),tot:0,ok:0,tried:new Set()};step()}
+function runMod(i){
+ const m=M[i];let steps=[{t:'teach'}];
+ m.q.forEach(q=>steps.push({t:'q',q,tag:'Practice'}));
+ if(i>0)sh(M.slice(0,i).flatMap(x=>x.q)).slice(0,3).forEach(q=>steps.push({t:'q',q:{...q},tag:'Review · '+M[q.m].n}));
+ steps.push({t:'recall'});newS(steps,'mod',m.n,i);
+}
+function runExam(){
+ let qs=[];M.forEach((m,i)=>qs.push(...sh(m.q).slice(0,i==11?4:3)));
+ qs.forEach(q=>q.d=(q.k=='mc'?1:2)+(q.m==11?1:0));
+ qs=sh(qs).sort((a,b)=>a.d-b.d);
+ newS(qs.map(q=>({t:'q',q,tag:'Exam · level '+q.d+' · '+M[q.m].n})),'exam','Final Exam');
+}
+function next(){S.i++;step()}
+function step(){
+ const s=S.steps[S.i];if(!s)return end();
+ const hd=`<small>${S.title} · step ${S.i+1}/${S.steps.length}</small>`;
+ if(s.t=='teach'){const m=M[S.mi];
+  show(`${hd}<div class="card"><h2>${m.n}</h2><p><b>Why learn this?</b> ${m.why}</p><p><b>Rule</b><br>${m.rule}</p><div class="cue">${m.cue}</div><b>Examples</b><ul>${m.ex.map(e=>'<li>'+e+'</li>').join('')}</ul><p class="warn"><b>Common mistake:</b> ${m.mis}</p><button class="p" onclick="next()">Start practice →</button></div>`);return}
+ if(s.t=='recall'){const m=M[S.mi];
+  show(`${hd}<div class="card"><span class="chip c">Can you remember?</span><h2>Say the memory pattern for this module from memory.</h2><p>Then reveal and compare.</p><div id="rv"></div><button onclick="$('#rv').innerHTML='<div class=cue>${m.cue.replace(/'/g,"\\'")}</div><p>${m.rl.replace(/'/g,"\\'")}</p>';this.disabled=true">Reveal</button><button class="p" onclick="next()">Finish module →</button></div>`);return}
+ S.cur=s.q;S.tag=s.tag;S.ans=[];draw(hd);
+}
+function draw(hd){
+ const q=S.cur;hd=hd||`<small>${S.title} · step ${S.i+1}/${S.steps.length}</small>`;S.hd=hd;
+ let b='';
+ if(q.k=='mc'){S.opts=sh(q.o);b='<div class="opts">'+S.opts.map((o,i)=>`<button data-i="${i}" onclick="ansMC(${i})">${o}</button>`).join('')+'</div>'}
+ else if(q.k=='fi')b='<input id="fi" autocomplete="off" onkeydown="if(event.key==\'Enter\')ansFI()"> <button class="p" onclick="ansFI()">Check</button>';
+ else{S.pool=sh(q.t);b='<div class="ans" id="ao"></div><div id="po"></div><button class="p" onclick="ansOD()">Check</button><button onclick="S.ans=[];odr()">Clear</button>'}
+ show(`${hd}<div class="card"><span class="chip ${S.tag.startsWith('Review')?'r':''}">${S.tag}</span><h2>${q.q}</h2>${b}<div id="fb"></div></div>`);
+ if(q.k=='od')odr();
+}
+function odr(){
+ $('#ao').innerHTML=S.ans.map(w=>`<button disabled>${w}</button>`).join('');
+ $('#po').innerHTML=S.pool.map((w,i)=>S.ans.some(a=>a.i===i)?'':`<button onclick="S.ans.push(Object.assign(new String('${w.replace(/'/g,"\\'")}'),{i:${i}}));odr()">${w}</button>`).join('');
+}
+function ansMC(i){const v=S.opts[i];document.querySelectorAll('.opts button').forEach((b,j)=>{b.disabled=true;if(S.opts[j]==S.cur.a)b.classList.add('ok');else if(j==i)b.classList.add('no')});grade(v==S.cur.a)}
+function ansFI(){const v=$('#fi').value;if(!v.trim())return;$('#fi').disabled=true;grade(S.cur.a.split('|').map(n2).includes(n2(v)))}
+function ansOD(){if(S.ans.length!=S.cur.t.length)return;grade(n2(S.ans.join(' '))==n2(S.cur.a))}
+function grade(ok){
+ const q=S.cur,key=S.i;
+ if(!S.tried.has(key)){S.tried.add(key);S.tot++;const sc=S.sc[q.m]=S.sc[q.m]||{c:0,t:0};sc.t++;if(ok){S.ok++;sc.c++}else S.miss.add(q.r)}
+ const last=S.i>=S.steps.length-1;
+ const nb=`<button class="p" onclick="next()">${S.mode=='exam'&&last?'See results →':'Next →'}</button>`;
+ $('#fb').innerHTML=ok?`<div class="fb ok">✓ Correct. ${q.why||''}<br><small>Rule: ${q.r}</small></div>${nb}`
+ :`<div class="fb no">✗ Not quite. Correct answer: <b>${q.a.split('|')[0]}</b><br><b>Why?</b> ${q.why||''}<br><b>Rule:</b> ${q.r}<br><b>Another example:</b> ${q.e}</div>${S.mode=='exam'?'':'<button onclick="draw(S.hd)">Try again</button>'}${nb}`;
+}
+function end(){
+ const pct=S.tot?Math.round(S.ok/S.tot*100):0;
+ if(S.mode=='mod'){P.d[S.mi]=Math.max(P.d[S.mi]||0,pct);save();bar();
+  show(`<div class="card"><h2>Module complete: ${pct}%</h2><p>${S.ok} of ${S.tot} correct on first try.</p>${S.miss.size?'<p class="warn"><b>Rules to revisit:</b><br>'+[...S.miss].join('<br>')+'</p>':'<p>🎉 Perfect first-try score!</p>'}<button class="p" onclick="home()">Back to modules</button><button onclick="runMod(${S.mi})">Repeat</button></div>`);return}
+ let rows='',st=[],wg=[],wv=[];
+ Object.keys(S.sc).forEach(i=>{const s=S.sc[i],p=Math.round(s.c/s.t*100);rows+=`<tr><td>${M[i].n}</td><td>${s.c}/${s.t}</td><td>${p}%</td></tr>`;
+  if(p>=80)st.push(M[i].n);else if(p<70)(M[i].g?wg:wv).push(M[i].rec)});
+ show(`<div class="card"><h2>Exam results</h2><p><b>Total: ${S.ok}/${S.tot} · ${pct}%</b></p><table><tr><th>Section</th><th>Score</th><th>%</th></tr>${rows}</table>
+ <h3>Strengths</h3><p>${st.join('; ')||'Keep practising — none above 80% yet.'}</p>
+ <h3>Grammar to review</h3><p>${wg.join('<br>')||'None — great work!'}</p>
+ <h3>Vocabulary to review</h3><p>${wv.join('<br>')||'None — great work!'}</p>
+ <h3>Rules you missed</h3><p>${[...S.miss].join('<br>')||'None.'}</p>
+ <button class="p" onclick="home()">Back to modules</button><button onclick="runExam()">Retake exam</button></div>`);
+}
+home();
+</script></body></html>
